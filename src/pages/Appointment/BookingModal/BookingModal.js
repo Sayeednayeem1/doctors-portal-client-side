@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React from 'react';
 
 const BookingModal = ({ treatment, selectedDate, setTreatment }) => {
-    let { name, slots } = treatment;
+    let { name: treatmentName, slots } = treatment;
 
     const date = format(selectedDate, "PP");
 
@@ -15,8 +15,8 @@ const BookingModal = ({ treatment, selectedDate, setTreatment }) => {
         let slot = form.slot.value;
         const booking = {
             appointmentDate: date,
-            treatment: name,
-            name,
+            treatment: treatmentName,
+            patient: name,
             phone,
             email,
             slot
@@ -31,7 +31,7 @@ const BookingModal = ({ treatment, selectedDate, setTreatment }) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">{name}</h3>
+                    <h3 className="text-lg font-bold">{treatmentName}</h3>
                     <form onSubmit={handleBooking} className='mt-8 grid grid-cols-1 gap-6'>
                         <input type="text" value={date} disabled className="input input-bordered w-full" />
                         <select name='slot' className="select select-bordered w-full">
@@ -40,7 +40,6 @@ const BookingModal = ({ treatment, selectedDate, setTreatment }) => {
                             }
                         </select>
                         <input name='name' type="text" placeholder="Full Name" className="input input-bordered w-full" />
-                        <input type="text" placeholder={name} disabled className="input input-bordered w-full" />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
                         <input name='email' type="email" placeholder="Email Address" className="input input-bordered w-full" />
                         <br />
