@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateCurrentUser, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import app from '../firebase/firebase.config';
+import { BallTriangle } from 'react-loader-spinner';
+import ReactLoader from '../Loader/ReactLoader';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -49,6 +51,12 @@ const AuthProvider = ({ children }) => {
         user,
         loading
     };
+
+    // todo loading function
+    if (loading) {
+        return <ReactLoader></ReactLoader>;
+    };
+
 
     return (
         <AuthContext.Provider value={authInfo}>
