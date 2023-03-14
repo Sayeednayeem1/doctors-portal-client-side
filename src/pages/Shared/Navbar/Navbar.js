@@ -49,7 +49,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Get started</a>
+                    <a className="btn">{user?.displayName}</a>
                 </div>
             </div>
         </div>
