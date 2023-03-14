@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import app from '../firebase/firebase.config';
 import { BallTriangle } from 'react-loader-spinner';
 import ReactLoader from '../Loader/ReactLoader';
@@ -21,6 +21,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
+    // todo google login/signup
+    const googleLogin = provider => {
+        setLoading(true);
+        return signInWithPopup(auth, provider);
+    }
 
     // todo update user Name
     const updateUser = (userInfo) => {
@@ -49,13 +54,14 @@ const AuthProvider = ({ children }) => {
         logOut,
         updateUser,
         user,
+        googleLogin,
         loading
     };
 
-    // todo loading function
-    if (loading) {
-        return <ReactLoader></ReactLoader>;
-    };
+    // // todo loading function
+    // if (loading) {
+    //     return <ReactLoader></ReactLoader>;
+    // };
 
 
     return (
