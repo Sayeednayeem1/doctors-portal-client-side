@@ -8,10 +8,11 @@ const AvailableAppointments = ({ selectedDate }) => {
 
     // let [appointmentOptions, setAppointmentOptions] = useState([]);
     let [treatment, setTreatment] = useState(null);
+    let date = format(selectedDate, 'PP')
 
-    const { data: appointmentOptions = [] } = useQuery({
-        queryKey: ['appointmentOptions'],
-        queryFn: () => fetch('http://localhost:5000/appointmentOptions')
+    const { data: appointmentOptions = [], refetch } = useQuery({
+        queryKey: ['appointmentOptions', date],
+        queryFn: () => fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
             .then(res => res.json())
     })
 
@@ -39,6 +40,7 @@ const AvailableAppointments = ({ selectedDate }) => {
                     selectedDate={selectedDate}
                     treatment={treatment}
                     setTreatment={setTreatment}
+                    refetch={refetch}
                 />
             }
         </section>
