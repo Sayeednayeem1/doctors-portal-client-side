@@ -14,7 +14,7 @@ const Home = () => {
             <InfoCards />
             <Services />
             <ExceptionalDentalCare />
-            {/* <MakeAppointment /> */}
+            <MakeAppointment />
             <Testimonial />
             <ContactUs />
         </div>
